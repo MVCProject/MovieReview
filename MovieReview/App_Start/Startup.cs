@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
 using Owin;
+using Microsoft.Owin.Security.Cookies;
 
-namespace MovieReview.Models
+[assembly: OwinStartup(typeof(MovieReview.App_Start.Startup))]
+
+namespace MovieReview.App_Start
 {
     public class Startup
     {

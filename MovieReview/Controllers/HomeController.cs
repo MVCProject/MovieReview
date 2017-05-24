@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MovieReview.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         // GET: Home
