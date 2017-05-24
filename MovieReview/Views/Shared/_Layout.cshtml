@@ -20,6 +20,15 @@
                 @Html.ActionLink("Movie Reviews For All", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Actors", "Index", "Actors")</li>
+                    <li>@Html.ActionLink("Directors", "Index", "Directors")</li>                    
+                    <li>@Html.ActionLink("Genre", "Index", "Genres")</li>
+                    <li>@Html.ActionLink("Movies", "Index", "Movies")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">                  
                     <li>
                         @if (!@User.Identity.IsAuthenticated)
