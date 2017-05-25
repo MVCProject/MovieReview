@@ -15,12 +15,14 @@ namespace MovieReview.Controllers
         private MainDbContext db = new MainDbContext();
 
         // GET: Directors
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Directors.ToList());
         }
 
         // GET: Directors/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Directors/Create
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Create([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirth,PlaceOfBirth")] Director director)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Directors/Edit/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Edit([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirth,PlaceOfBirth")] Director director)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Directors/Delete/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -1,4 +1,4 @@
-﻿@model MovieReview.Models.Movie
+﻿@model MovieReview.Models.Movies
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,16 +17,24 @@
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>Movie</h4>
+            <h4>Movies</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.MovieID)
+            @Html.HiddenFor(model => model.MoviesID)
     
             <div class="form-group">
                 @Html.LabelFor(model => model.MovieName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.MovieName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.MovieName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.MovieIcon, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MovieIcon, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MovieIcon, "", new { @class = "text-danger" })
                 </div>
             </div>
     
@@ -55,10 +63,10 @@
             </div>
     
             <div class="form-group">
-                @Html.LabelFor(model => model.DirectorID, "DirectorID", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.DirectorsID, "DirectorsID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("DirectorID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.DirectorID, "", new { @class = "text-danger" })
+                    @Html.DropDownList("DirectorsID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DirectorsID, "", new { @class = "text-danger" })
                 </div>
             </div>
     

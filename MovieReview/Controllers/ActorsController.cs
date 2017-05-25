@@ -15,12 +15,14 @@ namespace MovieReview.Controllers
         private MainDbContext db = new MainDbContext();
 
         // GET: Actors
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Actors.ToList());
         }
 
         // GET: Actors/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

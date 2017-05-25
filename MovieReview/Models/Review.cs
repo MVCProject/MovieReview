@@ -20,8 +20,8 @@ namespace MovieReview.Models
 
         public virtual int Rating { get; set; }
 
-        [ForeignKey("MovieID")]
+        [ForeignKey("MoviesID")]
         public Movies Movies { get; set; }
-        public virtual int MovieID { get; set; }
+        public virtual int MoviesID { get; set; }
     }
 }

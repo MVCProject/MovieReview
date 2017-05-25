@@ -15,7 +15,7 @@ namespace MovieReview.Models
 
         public virtual string MovieName { get; set; }
 
-        public virtual string MovieIcon { get; set; }
+        //public virtual string MovieIcon { get; set; }
 
         public virtual string MovieBio { get; set; }
 

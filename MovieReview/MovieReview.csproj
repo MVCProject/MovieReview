@@ -202,7 +202,6 @@
     <Compile Include="Controllers\DirectorsController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MovieActorsController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="CustomLibraries\CustomDecrypt.cs" />
@@ -218,11 +217,8 @@
     <Compile Include="Models\GetUserRole_Result.cs">
       <DependentUpon>UserRoleProcedure.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MovieActor.cs" />
-    <Compile Include="Models\MovieContext.cs" />
     <Compile Include="Models\Movies.cs" />
     <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\ReviewContext.cs" />
     <Compile Include="Models\UserRoleProcedure.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,16 +280,12 @@
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\MovieActors\Create.cshtml" />
-    <Content Include="Views\MovieActors\Delete.cshtml" />
-    <Content Include="Views\MovieActors\Details.cshtml" />
-    <Content Include="Views\MovieActors\Edit.cshtml" />
-    <Content Include="Views\MovieActors\Index.cshtml" />
     <Content Include="Views\Reviews\Create.cshtml" />
     <Content Include="Views\Reviews\Delete.cshtml" />
     <Content Include="Views\Reviews\Details.cshtml" />
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Movies\MovieReviews.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -303,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

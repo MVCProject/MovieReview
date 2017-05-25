@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MovieReview.Models.Review>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Movies.MovieName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewBody)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Movies.MovieName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewBody)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReviewId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReviewId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReviewId })
+        </td>
+    </tr>
+}
+
+</table>

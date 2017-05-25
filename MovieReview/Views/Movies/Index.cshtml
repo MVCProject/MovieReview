@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieReview.Models.Movie>
+﻿@model IEnumerable<MovieReview.Models.Movies>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,7 +18,7 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Director.DirectorName)
+                @Html.DisplayNameFor(model => model.Directors.DirectorName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MovieName)
@@ -47,7 +47,7 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Director.DirectorName)
+                @Html.DisplayFor(modelItem => item.Directors.DirectorName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MovieName)
@@ -71,9 +71,9 @@
                 @Html.DisplayFor(modelItem => item.Language)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.MovieID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.MovieID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.MovieID })
+                @Html.ActionLink("Edit", "Edit", new { id=item.MoviesID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.MoviesID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.MoviesID })
             </td>
         </tr>
     }

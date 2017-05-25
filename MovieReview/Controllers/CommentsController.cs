@@ -15,6 +15,7 @@ namespace MovieReview.Controllers
         private MainDbContext db = new MainDbContext();
 
         // GET: Comments
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var comments = db.Comments.Include(c => c.Users);
@@ -22,6 +23,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Comments/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

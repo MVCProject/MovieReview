@@ -15,6 +15,7 @@ namespace MovieReview.Controllers
         private MainDbContext db = new MainDbContext();
 
         // GET: Movies
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var movies = db.Movies.Include(m => m.Directors);
@@ -22,25 +23,26 @@ namespace MovieReview.Controllers
         }
 
         // GET: Movies/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movies movie = db.Movies.Find(id);
-            if (movie == null)
+            Movies movies = db.Movies.Find(id);
+            if (movies == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(movies);
         }
 
         // GET: Movies/Create
         [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Create()
         {
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName");
+            ViewBag.DirectorsID = new SelectList(db.Directors, "DirectorsID", "DirectorName");
             return View();
         }
 
@@ -50,17 +52,17 @@ namespace MovieReview.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeUserAccessLevel(UserRole = "Admin")]
-        public ActionResult Create([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movies movie)
+        public ActionResult Create([Bind(Include = "MoviesID,MovieName,MovieIcon,MovieBio,Rating,ReleaseDate,DirectorsID,Status,Country,Language")] Movies movies)
         {
             if (ModelState.IsValid)
             {
-                db.Movies.Add(movie);
+                db.Movies.Add(movies);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorsID);
-            return View(movie);
+            ViewBag.DirectorsID = new SelectList(db.Directors, "DirectorsID", "DirectorName", movies.DirectorsID);
+            return View(movies);
         }
 
         // GET: Movies/Edit/5
@@ -71,13 +73,13 @@ namespace MovieReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movies movie = db.Movies.Find(id);
-            if (movie == null)
+            Movies movies = db.Movies.Find(id);
+            if (movies == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorsID);
-            return View(movie);
+            ViewBag.DirectorsID = new SelectList(db.Directors, "DirectorsID", "DirectorName", movies.DirectorsID);
+            return View(movies);
         }
 
         // POST: Movies/Edit/5
@@ -86,16 +88,16 @@ namespace MovieReview.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeUserAccessLevel(UserRole = "Admin")]
-        public ActionResult Edit([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movies movie)
+        public ActionResult Edit([Bind(Include = "MoviesID,MovieName,MovieIcon,MovieBio,Rating,ReleaseDate,DirectorsID,Status,Country,Language")] Movies movies)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(movie).State = EntityState.Modified;
+                db.Entry(movies).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorsID);
-            return View(movie);
+            ViewBag.DirectorsID = new SelectList(db.Directors, "DirectorsID", "DirectorName", movies.DirectorsID);
+            return View(movies);
         }
 
         // GET: Movies/Delete/5
@@ -106,22 +108,21 @@ namespace MovieReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movies movie = db.Movies.Find(id);
-            if (movie == null)
+            Movies movies = db.Movies.Find(id);
+            if (movies == null)
             {
                 return HttpNotFound();
             }
-            return View(movie);
+            return View(movies);
         }
 
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Movies movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
+            Movies movies = db.Movies.Find(id);
+            db.Movies.Remove(movies);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

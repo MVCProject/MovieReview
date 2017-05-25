@@ -1,4 +1,4 @@
-﻿@model MovieReview.Models.Movie
+﻿@model MovieReview.Models.Movies
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,15 +14,15 @@
 <body>
     <h3>Are you sure you want to delete this?</h3>
     <div>
-        <h4>Movie</h4>
+        <h4>Movies</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Director.DirectorName)
+                @Html.DisplayNameFor(model => model.Directors.DirectorName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Director.DirectorName)
+                @Html.DisplayFor(model => model.Directors.DirectorName)
             </dd>
     
             <dt>

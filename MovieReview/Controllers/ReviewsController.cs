@@ -15,6 +15,7 @@ namespace MovieReview.Controllers
         private MainDbContext db = new MainDbContext();
 
         // GET: Reviews
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var reviews = db.Reviews.Include(r => r.Movies).Include(r => r.Users);
@@ -22,6 +23,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Reviews/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Reviews/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName");
@@ -49,6 +52,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ReviewId,UserID,ReviewBody,Rating,MovieID")] Review review)
         {
             if (ModelState.IsValid)
@@ -58,12 +62,13 @@ namespace MovieReview.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MovieID);
+            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MoviesID);
             ViewBag.UserID = new SelectList(db.Users, "Id", "Email", review.UserID);
             return View(review);
         }
 
         // GET: Reviews/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -75,7 +80,7 @@ namespace MovieReview.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MovieID);
+            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MoviesID);
             ViewBag.UserID = new SelectList(db.Users, "Id", "Email", review.UserID);
             return View(review);
         }
@@ -85,6 +90,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ReviewId,UserID,ReviewBody,Rating,MovieID")] Review review)
         {
             if (ModelState.IsValid)
@@ -93,12 +99,13 @@ namespace MovieReview.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MovieID);
+            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MoviesID);
             ViewBag.UserID = new SelectList(db.Users, "Id", "Email", review.UserID);
             return View(review);
         }
 
         // GET: Reviews/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +123,7 @@ namespace MovieReview.Controllers
         // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Review review = db.Reviews.Find(id);

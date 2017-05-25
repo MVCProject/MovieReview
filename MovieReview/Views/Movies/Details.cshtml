@@ -1,4 +1,4 @@
-﻿@model MovieReview.Models.Movie
+﻿@model MovieReview.Models.Movies
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,15 +13,15 @@
 </head>
 <body>
     <div>
-        <h4>Movie</h4>
+        <h4>Movies</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Director.DirectorName)
+                @Html.DisplayNameFor(model => model.Directors.DirectorName)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Director.DirectorName)
+                @Html.DisplayFor(model => model.Directors.DirectorName)
             </dd>
     
             <dt>
@@ -82,8 +82,10 @@
     
         </dl>
     </div>
+
+
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.MovieID }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MoviesID }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>
