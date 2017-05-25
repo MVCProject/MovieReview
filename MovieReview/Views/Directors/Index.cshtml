@@ -24,10 +24,10 @@
                 @Html.DisplayNameFor(model => model.Bio)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DOB)
+                @Html.DisplayNameFor(model => model.DateOfBirth)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.POB)
+                @Html.DisplayNameFor(model => model.PlaceOfBirth)
             </th>
             <th></th>
         </tr>
@@ -41,15 +41,15 @@
                 @Html.DisplayFor(modelItem => item.Bio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DOB)
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.POB)
+                @Html.DisplayFor(modelItem => item.PlaceOfBirth)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.DirectorID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.DirectorID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.DirectorID })
+                @Html.ActionLink("Edit", "Edit", new { id=item.DirectorsID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.DirectorsID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.DirectorsID })
             </td>
         </tr>
     }

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Security.Claims;
 using MovieReview.CustomLibraries;
+using System.Threading;
 
 namespace MovieReview.Controllers
 {
@@ -51,6 +52,9 @@ namespace MovieReview.Controllers
                     new Claim(ClaimTypes.Name, name),
                     new Claim(ClaimTypes.Email, email),
                     new Claim(ClaimTypes.Country, country)}, "ApplicationCookie");
+                    var claimsPrincipal = new ClaimsPrincipal(identity);
+                    // Set current principal
+                    Thread.CurrentPrincipal = claimsPrincipal;
 
                     var ctx = Request.GetOwinContext();
                     var authManager = ctx.Authentication;

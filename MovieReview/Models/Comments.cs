@@ -10,7 +10,7 @@ namespace MovieReview.Models
     public class Comments
     {
         [Key]
-        public virtual int CommentID { get; set; }
+        public virtual int CommentsID { get; set; }
         public virtual string CommentBody { get; set; }
 
         public virtual int UserID { get; set; }

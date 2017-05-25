@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace MovieReview.Models
 {
-    public class Movie
+    public class Movies
     {
-        public virtual int MovieID { get; set; }
+        [Key]
+        public virtual int MoviesID { get; set; }
 
         public virtual string MovieName { get; set; }
 
@@ -18,9 +21,9 @@ namespace MovieReview.Models
 
         public virtual DateTime ReleaseDate { get; set; }
 
-        [ForeignKey("DirectorID")]
+        [ForeignKey("DirectorsID")]
         public Director Director { get; set; }
-        public virtual int DirectorID { get; set; }
+        public virtual int DirectorsID { get; set; }
 
         public virtual string Status { get; set; }
 

@@ -18,8 +18,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -112,6 +112,8 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0-preview1-25214-03\lib\net45\System.Diagnostics.DiagnosticSource.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -162,8 +164,25 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\UserRoleProcedure.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserRoleProcedure.edmx</DependentUpon>
+      <LastGenOutput>UserRoleProcedure.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UserRoleProcedure.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserRoleProcedure.edmx</DependentUpon>
+      <LastGenOutput>UserRoleProcedure1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\UserRoleProcedure.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UserRoleProcedure.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UserRoleProcedure.edmx.diagram">
+      <DependentUpon>UserRoleProcedure.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -178,6 +197,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\ActorsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\DirectorsController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
@@ -193,7 +213,26 @@
     <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\Director.cs" />
     <Compile Include="Models\Genres.cs" />
-    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\GetUserRole_Result.cs">
+      <DependentUpon>UserRoleProcedure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Movies.cs" />
+    <Compile Include="Models\UserRoleProcedure.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserRoleProcedure.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserRoleProcedure.cs" />
+    <Compile Include="Models\UserRoleProcedure.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserRoleProcedure.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserRoleProcedure1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserRoleProcedure.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -237,6 +276,8 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Movies\Edit.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -244,7 +285,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

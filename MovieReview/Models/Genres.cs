@@ -10,7 +10,7 @@ namespace MovieReview.Models
     public class Genres
     {
         [Key]
-        public virtual int GenreID { get; set; }
+        public virtual int GenresID { get; set; }
         public virtual string GenreName { get; set; }
     }
 }

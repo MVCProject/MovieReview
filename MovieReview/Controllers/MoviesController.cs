@@ -28,7 +28,7 @@ namespace MovieReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
+            Movies movie = db.Movies.Find(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -48,7 +48,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movie movie)
+        public ActionResult Create([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movies movie)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace MovieReview.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorID);
+            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorsID);
             return View(movie);
         }
 
@@ -68,12 +68,12 @@ namespace MovieReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
+            Movies movie = db.Movies.Find(id);
             if (movie == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorID);
+            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorsID);
             return View(movie);
         }
 
@@ -82,7 +82,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movie movie)
+        public ActionResult Edit([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movies movie)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace MovieReview.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorID);
+            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName", movie.DirectorsID);
             return View(movie);
         }
 
@@ -101,7 +101,7 @@ namespace MovieReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Movie movie = db.Movies.Find(id);
+            Movies movie = db.Movies.Find(id);
             if (movie == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace MovieReview.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Movie movie = db.Movies.Find(id);
+            Movies movie = db.Movies.Find(id);
             db.Movies.Remove(movie);
             db.SaveChanges();
             return RedirectToAction("Index");

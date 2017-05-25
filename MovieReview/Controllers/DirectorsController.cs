@@ -46,7 +46,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DirectorID,DirectorName,Bio,DOB,POB")] Director director)
+        public ActionResult Create([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirthOB,PlaceOfBirth")] Director director)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DirectorID,DirectorName,Bio,DOB,POB")] Director director)
+        public ActionResult Edit([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirthOB,PlaceOfBirth")] Director director)
         {
             if (ModelState.IsValid)
             {
