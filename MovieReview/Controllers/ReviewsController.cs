@@ -10,107 +10,116 @@ using MovieReview.Models;
 
 namespace MovieReview.Controllers
 {
-    public class DirectorsController : Controller
+    public class ReviewsController : Controller
     {
         private MainDbContext db = new MainDbContext();
 
-        // GET: Directors
+        // GET: Reviews
         public ActionResult Index()
         {
-            return View(db.Directors.ToList());
+            var reviews = db.Reviews.Include(r => r.Movies).Include(r => r.Users);
+            return View(reviews.ToList());
         }
 
-        // GET: Directors/Details/5
+        // GET: Reviews/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Director director = db.Directors.Find(id);
-            if (director == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(director);
+            return View(review);
         }
 
-        // GET: Directors/Create
+        // GET: Reviews/Create
         public ActionResult Create()
         {
+            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName");
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: Directors/Create
+        // POST: Reviews/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirth,PlaceOfBirth")] Director director)
+        public ActionResult Create([Bind(Include = "ReviewId,UserID,ReviewBody,Rating,MovieID")] Review review)
         {
             if (ModelState.IsValid)
             {
-                db.Directors.Add(director);
+                db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(director);
+            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MovieID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", review.UserID);
+            return View(review);
         }
 
-        // GET: Directors/Edit/5
+        // GET: Reviews/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Director director = db.Directors.Find(id);
-            if (director == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(director);
+            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MovieID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", review.UserID);
+            return View(review);
         }
 
-        // POST: Directors/Edit/5
+        // POST: Reviews/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirth,PlaceOfBirth")] Director director)
+        public ActionResult Edit([Bind(Include = "ReviewId,UserID,ReviewBody,Rating,MovieID")] Review review)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(director).State = EntityState.Modified;
+                db.Entry(review).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(director);
+            ViewBag.MovieID = new SelectList(db.Movies, "MoviesID", "MovieName", review.MovieID);
+            ViewBag.UserID = new SelectList(db.Users, "Id", "Email", review.UserID);
+            return View(review);
         }
 
-        // GET: Directors/Delete/5
+        // GET: Reviews/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Director director = db.Directors.Find(id);
-            if (director == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return HttpNotFound();
             }
-            return View(director);
+            return View(review);
         }
 
-        // POST: Directors/Delete/5
+        // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Director director = db.Directors.Find(id);
-            db.Directors.Remove(director);
+            Review review = db.Reviews.Find(id);
+            db.Reviews.Remove(review);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

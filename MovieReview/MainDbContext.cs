@@ -29,6 +29,10 @@ namespace MovieReview
 
         public DbSet<Movies> Movies { get; set; }
 
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<MovieActor> MovieActors { get; set; }
+
 
         public virtual ObjectResult<GetUserRole_Result> GetUserRole(string userEmail)
         {

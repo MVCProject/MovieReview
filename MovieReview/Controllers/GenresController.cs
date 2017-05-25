@@ -36,6 +36,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Genres/Create
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -44,6 +45,7 @@ namespace MovieReview.Controllers
         // POST: Genres/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GenreID,GenreName")] Genres genres)
@@ -59,6 +61,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Genres/Edit/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,6 +79,7 @@ namespace MovieReview.Controllers
         // POST: Genres/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GenreID,GenreName")] Genres genres)
@@ -89,7 +93,9 @@ namespace MovieReview.Controllers
             return View(genres);
         }
 
+
         // GET: Genres/Delete/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,6 +111,7 @@ namespace MovieReview.Controllers
         }
 
         // POST: Genres/Delete/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

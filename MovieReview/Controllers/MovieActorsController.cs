@@ -10,107 +10,107 @@ using MovieReview.Models;
 
 namespace MovieReview.Controllers
 {
-    public class DirectorsController : Controller
+    public class MovieActorsController : Controller
     {
-        private MainDbContext db = new MainDbContext();
+        private MovieContext db = new MovieContext();
 
-        // GET: Directors
+        // GET: MovieActors
         public ActionResult Index()
         {
-            return View(db.Directors.ToList());
+            return View(db.MovieActors.ToList());
         }
 
-        // GET: Directors/Details/5
+        // GET: MovieActors/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Director director = db.Directors.Find(id);
-            if (director == null)
+            MovieActor movieActor = db.MovieActors.Find(id);
+            if (movieActor == null)
             {
                 return HttpNotFound();
             }
-            return View(director);
+            return View(movieActor);
         }
 
-        // GET: Directors/Create
+        // GET: MovieActors/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Directors/Create
+        // POST: MovieActors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirth,PlaceOfBirth")] Director director)
+        public ActionResult Create([Bind(Include = "ActorsID,MoviesID")] MovieActor movieActor)
         {
             if (ModelState.IsValid)
             {
-                db.Directors.Add(director);
+                db.MovieActors.Add(movieActor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(director);
+            return View(movieActor);
         }
 
-        // GET: Directors/Edit/5
+        // GET: MovieActors/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Director director = db.Directors.Find(id);
-            if (director == null)
+            MovieActor movieActor = db.MovieActors.Find(id);
+            if (movieActor == null)
             {
                 return HttpNotFound();
             }
-            return View(director);
+            return View(movieActor);
         }
 
-        // POST: Directors/Edit/5
+        // POST: MovieActors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DirectorsID,DirectorName,Bio,DateOfBirth,PlaceOfBirth")] Director director)
+        public ActionResult Edit([Bind(Include = "ActorsID,MoviesID")] MovieActor movieActor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(director).State = EntityState.Modified;
+                db.Entry(movieActor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(director);
+            return View(movieActor);
         }
 
-        // GET: Directors/Delete/5
+        // GET: MovieActors/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Director director = db.Directors.Find(id);
-            if (director == null)
+            MovieActor movieActor = db.MovieActors.Find(id);
+            if (movieActor == null)
             {
                 return HttpNotFound();
             }
-            return View(director);
+            return View(movieActor);
         }
 
-        // POST: Directors/Delete/5
+        // POST: MovieActors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Director director = db.Directors.Find(id);
-            db.Directors.Remove(director);
+            MovieActor movieActor = db.MovieActors.Find(id);
+            db.MovieActors.Remove(movieActor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

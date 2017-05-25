@@ -17,7 +17,7 @@ namespace MovieReview.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            var movies = db.Movies.Include(m => m.Director);
+            var movies = db.Movies.Include(m => m.Directors);
             return View(movies.ToList());
         }
 
@@ -37,6 +37,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Movies/Create
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Create()
         {
             ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "DirectorName");
@@ -48,6 +49,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Create([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movies movie)
         {
             if (ModelState.IsValid)
@@ -62,6 +64,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Movies/Edit/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +85,7 @@ namespace MovieReview.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Edit([Bind(Include = "MovieID,MovieName,MovieBio,Rating,ReleaseDate,DirectorID,Status,Country,Language")] Movies movie)
         {
             if (ModelState.IsValid)
@@ -95,6 +99,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Movies/Delete/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +117,7 @@ namespace MovieReview.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Movies movie = db.Movies.Find(id);

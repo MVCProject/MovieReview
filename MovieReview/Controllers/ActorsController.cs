@@ -36,6 +36,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Actors/Create
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -44,6 +45,7 @@ namespace MovieReview.Controllers
         // POST: Actors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ActorsID,ActorName,Bio,DateOfBirth,PlaceOfBirth")] Actor actor)
@@ -59,6 +61,7 @@ namespace MovieReview.Controllers
         }
 
         // GET: Actors/Edit/5
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,6 +79,7 @@ namespace MovieReview.Controllers
         // POST: Actors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ActorsID,ActorName,Bio,DateOfBirth,PlaceOfBirth")] Actor actor)
@@ -88,7 +92,7 @@ namespace MovieReview.Controllers
             }
             return View(actor);
         }
-
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         // GET: Actors/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -103,7 +107,7 @@ namespace MovieReview.Controllers
             }
             return View(actor);
         }
-
+        [AuthorizeUserAccessLevel(UserRole = "Admin")]
         // POST: Actors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

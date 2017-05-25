@@ -24,7 +24,7 @@ namespace MovieReview.Controllers
         }
 
         //GET: Contact
-        [AuthorizeUserAccessLevel(UserRole = "Manager")]
+        [Authorize]
         public ActionResult Contact()
         {
             return View();

@@ -15,6 +15,8 @@ namespace MovieReview.Models
 
         public virtual string MovieName { get; set; }
 
+        public virtual string MovieIcon { get; set; }
+
         public virtual string MovieBio { get; set; }
 
         public virtual int Rating { get; set; }
@@ -22,7 +24,7 @@ namespace MovieReview.Models
         public virtual DateTime ReleaseDate { get; set; }
 
         [ForeignKey("DirectorsID")]
-        public Director Director { get; set; }
+        public Director Directors { get; set; }
         public virtual int DirectorsID { get; set; }
 
         public virtual string Status { get; set; }
@@ -30,6 +32,8 @@ namespace MovieReview.Models
         public virtual string Country { get; set; }
 
         public virtual string Language { get; set; }
+
+        //public ICollection<MovieActor> MovieActors { get; set; }
 
     }
 }
